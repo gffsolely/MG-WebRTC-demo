@@ -142,7 +142,7 @@
   <script src="./js/adapter-7.2.5/adapter.js"></script>
   <script src="./js/jsencrypt.min.js"></script>
   <!-- demo mg-rtc-player jssdk，实际使用时 请联系开发者拿到最新的 jssdk -->
-  <script src="./mg-rtc-player.min.js"></script>
+  <script src="./js/mg-rtc-player.min.js"></script>
   <script>
     window.addEventListener('load', () => {
       let appId = MgUtil.getQueryString('id');
@@ -157,7 +157,7 @@
           },
           rtcConfig:{ elementId:playElemId,
               roomServer: "https://webrtc.xxx.com",
-              wssUrl: 'wss://webrtc.xxx.com:8089/ws',
+              wssUrl: 'wss://webrtc.xxx.com/ws',
               iceServerRequestUrl: 'https://webrtc.xxx.com/iceconfig',},
           videoConfig: {
             videoConf: { vCodec: "H264", vBitrate: 4000, vLevel: 1 },
