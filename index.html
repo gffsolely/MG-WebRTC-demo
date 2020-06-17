@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+  <meta itemprop="description" content="Video chat using the reference WebRTC application">
+  <meta name="description" content="WebRTC reference app">
+  <meta itemprop="name" content="MgWebRTC">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!--[if IE]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <![endif]-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="320">
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="full-screen" content="yes">
+  <meta name="x5-fullscreen" content="true">
+  <meta name="browsermode" content="application">
+  <meta name="x5-page-mode" content="app">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="320">
+  <meta name="360-fullscreen" content="true">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta id="theme-color" name="theme-color" content="#1e1e1e">
+  <base target="_blank">
+  <title>MG-WebRTC</title>
+  <style>
+    html,body {
+      height: 100%;
+      margin: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    /* londing layer begin*/
+    .mg-hide {display: none !important;}
+    .mg-loading {
+      position: fixed;
+      top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    background-position: center 0;
+    background-size: cover;
+    vertical-align: middle;
+    z-index: 100;
+    
+    }
+    .mg-loading .loading-con{
+      width: 100%;
+      height: 100px;
+      text-align: center;
+      position:absolute;
+    top: 44%;
+    }
+    .mg-loading .loading-con>p{ margin-top: 40px; color: #fff; font-size:12px;}
+    .mg-loading .loading-con .lc-typing{width: 38px; margin: 0 auto;}
+    /* londing icon begin*/
+    .typing-loader{
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      -webkit-animation: typing 1s linear infinite alternate;
+      -moz-animation: Typing 1s linear infinite alternate;
+      animation: typing 1s linear infinite alternate;
+    }
+    @-webkit-keyframes typing{
+      0%{
+          background-color: rgba(255,255,255, 1);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,0.2),
+          24px 0px 0px 0px rgba(255,255,255,0.2);
+      }
+      25%{
+          background-color: rgba(255,255,255, 0.4);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,2),
+          24px 0px 0px 0px rgba(255,255,255,0.2);
+      }
+      75%{ background-color: rgba(255,255,255, 0.4);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,0.2),
+          24px 0px 0px 0px rgba(255,255,255,1);
+      }
+    }
+
+    @-moz-keyframes typing{
+      0%{
+          background-color: rgba(255,255,255, 1);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,0.2),
+          24px 0px 0px 0px rgba(255,255,255,0.2);
+      }
+      25%{
+          background-color: rgba(255,255,255, 0.4);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,2),
+          24px 0px 0px 0px rgba(255,255,255,0.2);
+      }
+      75%{ background-color: rgba(255,255,255, 0.4);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,0.2),
+          24px 0px 0px 0px rgba(255,255,255,1);
+      }
+    }
+
+    @keyframes typing{
+      0%{
+          background-color: rgba(255,255,255, 1);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,0.2),
+          24px 0px 0px 0px rgba(255,255,255,0.2);
+      }
+      25%{
+          background-color: rgba(255,255,255, 0.4);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,2),
+          24px 0px 0px 0px rgba(255,255,255,0.2);
+      }
+      75%{ background-color: rgba(255,255,255, 0.4);
+          box-shadow: 12px 0px 0px 0px rgba(255,255,255,0.2),
+          24px 0px 0px 0px rgba(255,255,255,1);
+      }
+    }
+    /* londing icon  end*/
+    /* londing layer end*/
+  </style>
+</head>
+
+<body id="app">
+  <div id="remote_video_box">
+  </div>
+
+  <div class="mg-loading" id="mg_loading">
+    <div class="loading-con">
+      <p class="lc-text"> 正在加载中... </p>
+      <div class="lc-typing">
+        <div class="typing-loader"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/adapter-7.2.5/adapter.js"></script>
+  <script src="./js/jsencrypt.min.js"></script>
+  <!-- demo mg-rtc-player jssdk，实际使用时 请联系开发者拿到最新的 jssdk -->
+  <script src="./mg-rtc-player.min.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      let appId = MgUtil.getQueryString('id');
+
+      if (appId && appId.length > 0) {
+        let playElemId="remote_video_box";
+        mgRtcPlayer.init({
+          paasConfig: {
+            playType: 2, playValue: appId,
+            playSdkApiUrl: 'http://xxx.com/v2/connect_v2', //your api url
+            playKeepaliveUrl: 'http://xxx.com/v2/keepalive' 
+          },
+          rtcConfig:{ elementId:playElemId,
+              roomServer: "https://webrtc.xxx.com",
+              wssUrl: 'wss://webrtc.xxx.com:8089/ws',
+              iceServerRequestUrl: 'https://webrtc.xxx.com/iceconfig',},
+          videoConfig: {
+            videoConf: { vCodec: "H264", vBitrate: 4000, vLevel: 1 },
+          },
+          events: {
+            onStart: function () {
+              $("#mg_loading").classList.add('mg-hide');
+              console.log('mg html onStart' );
+            },
+            onStop: function () {
+              console.log('mg html onStop');
+            },
+            onError: function (type, code, msg) {
+              console.log("mg html onError,type:" + type + ",code:" + code + ",msg:" + msg );
+            }
+          }
+        }).start();
+      }
+      else {
+        console.log('mg html-error', '缺少参数, id ');
+      }
+    }, false);
+
+  </script>
+</body>
+
+</html>
