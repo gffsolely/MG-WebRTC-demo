@@ -151,12 +151,11 @@
         mgRtcPlayer.init({
           paasConfig: {
             playType: 2, playValue: appId,
-            playSdkApiUrl: 'http://xxx.com/v2/connect_v2', //your api url
-            playKeepaliveUrl: 'http://xxx.com/v2/keepalive' 
+            palyAppKey: 'your app key', 
           },
           rtcConfig:{ elementId:playElemId,},
           videoConfig: {
-            videoConf: { vCodec: "H264", vBitrate: 4000, vLevel: 1 },
+            videoConf: { vCodec: "H264", vBitrate: 2000, vLevel: 2 },
           },
           events: {
             onStart: function () {
