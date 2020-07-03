@@ -24,6 +24,7 @@
 ---|---|---
 v0.0.1 | 测试版本，实现基础功能 | 不支持https协议
 v0.1.2 | 测试版本，优化了部分兼容性 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
+v0.1.3 | 测试版本，增加了试玩关键指标值 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
 
 
 
@@ -34,7 +35,7 @@ v0.1.2 | 测试版本，优化了部分兼容性 | 不支持https协议，ios微
 该方法无需下载安装包。在项目文件中，将以下代码添加到页面中，尽量为 `<body>` 底部：
 
 ```javascript
-<script src="http://v1.xmyimg.com/xmy/webrtc/jssdk/mg-rtc-player-0.1.2.js"></script>
+<script src="http://v1.xmyimg.com/xmy/webrtc/jssdk/mg-rtc-player-0.1.3.js"></script>
 ```
 
 现在，我们已经将 MgRtcPlayer web SDK 集成到项目中了。接下来我们要通过调用 MgRtcPlayer web SDK 提供的 API 来实现功能。
@@ -86,6 +87,9 @@ SDK中主要对象说明：
       onStart: function () {
         console.log('mg html onStart' );
       },
+      onRunInfo: function (netDelay,fps,jitterDelay,recBitrate,w,h){
+        //网络延迟,fps,编码&传送延迟,码率,视频宽,视频高
+      },
       onStop: function () {
         console.log('mg html onStop');
       },
@@ -133,6 +137,13 @@ SDK中主要对象说明：
   - type 错误类型
   - code 错误标识号（详情请见 **错误标识**）
   - msg 错误描述
+- events.onRunInfo 试玩过程中关键指标值（**部分值在某些浏览器中无法获取**）
+  - netDelay     网络延迟
+  - fps          帧率
+  - jitterDelay  编码&传送延迟
+  - recBitrate   码率
+  - w            视频宽
+  - h            视频高
 
 ### 开始试玩
 
@@ -175,8 +186,13 @@ mgRtcPlayer.enableVoice();  //无参数时默认是开启声音
 有用户交互 举例：可以在当前页面添加一个开始按钮，点击按钮事件中调用,如下
 ```javascript
 btn.click(()=>{
- mgRtcPlayer.enableVoice();
- mgRtcPlayer.start(); 
+ mgRtcPlayer.init({...
+    events: {
+      onStart: function () {
+        mgRtcPlayer.enableVoice();
+        console.log('mg html onStart' );
+      },}
+    ...}).start(); 
 });
  
 ```
