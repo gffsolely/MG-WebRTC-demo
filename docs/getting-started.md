@@ -110,13 +110,13 @@ SDK中主要对象说明：
 #### paasConfig
 - paasConfig 对游戏调度所需的接口配置
 - paasConfig.playType 取值说明：
-    - 2:使用appid试玩 playType取值:2 且playValue取值:playAppId
-    - 3:使用app包名试玩 playType取值:3 且 playValue取值:playAppPackageName
+    - 2:使用appid试玩 playType取值:2 时playValue取值:playAppId
+    - 3:使用app包名试玩 playType取值:3 时playValue取值:playAppPackageName
 - paasConfig.palyAppKey 瞬玩运营平台中分配给对应帐号的appkey（**appkey请联系商务获取**），用于资源调度
 
 #### rtcConfig
 - rtcConfig WebRTC参数配置
-- rtcConfig.roomId   webrtc房间标识（不设置 取系统随机值）
+- rtcConfig.roomId   webrtc房间标识，建议每次投屏都换一个值（不设置时 默认取系统随机值）
 - rtcConfig.elementId 试玩画面所在控件id
 
 #### videoConfig
