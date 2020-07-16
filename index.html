@@ -143,6 +143,13 @@
   <!-- demo mg-rtc-player jssdk，实际使用时 请联系开发者拿到最新的 jssdk -->
   <script src="./js/mg-rtc-player.min.js"></script>
   <script>
+  let lProtocol = window.location.protocol;
+  if (lProtocol === 'https:') {
+      var oMeta = document.createElement('meta');
+      oMeta.content = 'upgrade-insecure-requests'; // http 转 https
+      oMeta.httpEquiv = 'Content-Security-Policy';
+      document.getElementsByTagName('head')[0].appendChild(oMeta);
+  }
     window.addEventListener('load', () => {
       let appId = MgUtil.getQueryString('id');
 
@@ -155,7 +162,7 @@
           },
           rtcConfig:{ elementId:playElemId,},
           videoConfig: {
-            videoConf: { vCodec: "H264", vBitrate: 2000, vLevel: 2 },
+            videoConf: { vCodec: "H264", vBitrate: 2000, vLevel: 2, mute: false },
           },
           events: {
             onStart: function () {
