@@ -169,6 +169,9 @@
               $("#mg_loading").classList.add('mg-hide');
               console.log('mg html onStart' );
             },
+            onRunInfo: function (netDelay,fps,jitterDelay,recBitrate,w,h){
+              //网络延迟,fps,编码&传送延迟,码率,视频宽,视频高
+            },
             onStop: function () {
               console.log('mg html onStop');
             },
