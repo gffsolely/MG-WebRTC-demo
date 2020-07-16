@@ -5,12 +5,11 @@
    | 平台         | Chrome 58+ | Firefox 56+ | Safari 11+ | Opera 45+ | QQ 浏览器 10.5+ | 360 安全浏览器 | 微信浏览器 |
    | ------------ | ---------- | ----------- | ---------- | --------- | --------------- | -------------- | ---------- |
    | Android 4.1+ | ✔          | ✘           | **N/A**    | ✘         | ✘               | ✘              | ✔       |
-   | iOS 11+      | ✘          | ✘           | ✔          | ✘         | ✘               | ✘              | ✘          |
+   | iOS 13+      | ✘          | ✘           | ✔          | ✘         | ✘               | ✘              | ✔         |
    | macOS 10+    | ✔          | ✔           | ✔          | ✔         | ✔               | ✘              | ✘          |
    | Windows 7+   | ✔          | ✔           | **N/A**    | ✔         | ✔               | ✔              | ✘          |
 
 2. 在支持的浏览器及内核之上，大部分机型浏览器中支持H264编码，然而在使用Webview时目前还是建议选择VP8编码
-
 
 ## 设置开发环境
 
@@ -29,6 +28,8 @@
 4. 项目中需要使用一些第三方的库
 - [adapter.js](https://github.com/Temasys/AdapterJS)
 - [jsencrypt.min.js](https://npmcdn.com/jsencrypt@2.3.1/bin/jsencrypt.js)
+5. 使用https访问时需要在页面<head>中增加 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">，把http转https
+
 
 ### SDK版本列表
 
@@ -39,7 +40,7 @@
 v0.0.1 | 测试版本，实现基础功能 | 不支持https协议
 v0.1.2 | 测试版本，优化了部分兼容性 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
 v0.1.3 | 测试版本，增加了试玩关键指标值 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
-
+v0.1.6 | 测试版本，更新升级了WebRTC主要服务，增加对https支持 | ios12及以下微信内置、UC等部分浏览器暂不支持
 
 
 ### 集成 SDK
@@ -49,7 +50,7 @@ v0.1.3 | 测试版本，增加了试玩关键指标值 | 不支持https协议，
 该方法无需下载安装包。在项目文件中，将以下代码添加到页面中，尽量为 `<body>` 底部：
 
 ```javascript
-<script src="http://v1.xmyimg.com/xmy/webrtc/jssdk/mg-rtc-player-0.1.3.js"></script>
+<script src="http://v1.xmyimg.com/xmy/webrtc/jssdk/mg-rtc-player-0.1.6.js"></script>
 ```
 
 现在，我们已经将 MgRtcPlayer web SDK 集成到项目中了。接下来我们要通过调用 MgRtcPlayer web SDK 提供的 API 来实现功能。
@@ -95,7 +96,7 @@ SDK中主要对象说明：
         roomId: playRoomId,
         elementId:playElemId,},
     videoConfig: {
-      videoConf: { vCodec: "H264", vBitrate: 4000, vLevel: 1 },
+      videoConf: { vCodec: "H264", vBitrate: 4000, vLevel: 1, mute: false },
     },
     events: {
       onStart: function () {
@@ -142,6 +143,7 @@ SDK中主要对象说明：
   -  2: 576 X 1024
   -  3: 432 X 768
   -  4: 288 X 512
+- videoConfig.videoConf.mute 是否静音
 
 #### events
 - events 回调事件合集
@@ -170,8 +172,10 @@ SDK中主要对象说明：
 ```
 ### 设置试玩参数
 
+ 参数说明请查看 **videoConfig**
+
 ```javascript
- mgRtcPlayer.setVideoConf({ vCodec: v_vcodec, vBitrate: v_bitrate, vLevel: v_level });
+ mgRtcPlayer.setVideoConf({ vCodec: v_vcodec, vBitrate: v_bitrate, vLevel: v_level, mute: v_mute });
 ```
 **注意:** 试玩参数 只有在 mgRtcPlayer.init() 之后并且 mgRtcPlayer.start()之前设置才能生效
 
