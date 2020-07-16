@@ -28,10 +28,8 @@
 4. 项目中需要使用一些第三方的库
 - [adapter.js](https://github.com/Temasys/AdapterJS)
 - [jsencrypt.min.js](https://npmcdn.com/jsencrypt@2.3.1/bin/jsencrypt.js)
-5. 使用https访问时需要在页面head中增加如下标签，把http转https
-```html
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-```
+5. 使用https访问时需要在页面`<head>`中增加`<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">`，把http转https
+
 
 
 ### SDK版本列表
@@ -43,7 +41,7 @@
 v0.0.1 | 测试版本，实现基础功能 | 不支持https协议
 v0.1.2 | 测试版本，优化了部分兼容性 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
 v0.1.3 | 测试版本，增加了试玩关键指标值 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
-v0.1.6 | 测试版本，更新升级了WebRTC主要服务，增加对https支持 | ios12及以下微信内置、UC等部分浏览器暂不支持
+v0.1.6 | 测试版本，对WebRTC主要服务更新升级，增加对https支持 | ios12及以下微信内置、UC等部分浏览器暂不支持
 
 
 ### 集成 SDK
