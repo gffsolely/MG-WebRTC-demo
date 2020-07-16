@@ -28,7 +28,10 @@
 4. 项目中需要使用一些第三方的库
 - [adapter.js](https://github.com/Temasys/AdapterJS)
 - [jsencrypt.min.js](https://npmcdn.com/jsencrypt@2.3.1/bin/jsencrypt.js)
-5. 使用https访问时需要在页面<head>中增加 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">，把http转https
+5. 使用https访问时需要在页面head中增加如下标签，把http转https
+```html
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+```
 
 
 ### SDK版本列表
