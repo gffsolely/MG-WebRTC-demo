@@ -51,7 +51,7 @@ v0.1.6 | 测试版本，对WebRTC主要服务更新升级，增加对https支持
 该方法无需下载安装包。在项目文件中，将以下代码添加到页面中，尽量为 `<body>` 底部：
 
 ```javascript
-<script src="http://v1.xmyimg.com/xmy/webrtc/jssdk/mg-rtc-player-0.1.6.js"></script>
+<script src="//sw-cdn.shunwanyun.com/webrtc/jssdk/mg-rtc-player-0.1.6.js"></script>
 ```
 
 现在，我们已经将 MgRtcPlayer web SDK 集成到项目中了。接下来我们要通过调用 MgRtcPlayer web SDK 提供的 API 来实现功能。
