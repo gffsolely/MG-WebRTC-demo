@@ -138,7 +138,7 @@ SDK中主要对象说明：
 - rtcConfig.elementId 试玩画面所在控件id
 
 #### videoConfig
-- videoConfig 试玩画面质量配置
+- videoConfig 试玩画面质量配置 （注意：参数配置优先级 mgRtcPlayer.setVideoConf方法 > 服务端参数配置 > init.videoConfig.videoConf ）
 - videoConfig.videoConf.vCodec 设置默认编码，根据浏览器支持范围（注意：目前webview时必须设置为VP8）
 - videoConfig.videoConf.vBitrate 码率 单位kb
 - videoConfig.videoConf.vLevel 分辨率,取值 : 
