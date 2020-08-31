@@ -28,7 +28,7 @@
 4. 项目中需要使用一些第三方的库
 - [adapter.js](https://github.com/Temasys/AdapterJS)
 - [jsencrypt.min.js](https://npmcdn.com/jsencrypt@2.3.1/bin/jsencrypt.js)
-5. 使用https访问时需要在页面`<head>`中增加`<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">`，把http转https
+
 
 
 
@@ -42,6 +42,7 @@ v0.0.1 | 测试版本，实现基础功能 | 不支持https协议
 v0.1.2 | 测试版本，优化了部分兼容性 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
 v0.1.3 | 测试版本，增加了试玩关键指标值 | 不支持https协议，ios微信内置、UC等部分浏览器暂不支持
 v0.1.6 | 测试版本，对WebRTC主要服务更新升级，增加对https支持 | ios12及以下微信内置、UC等部分浏览器暂不支持
+v0.1.7 | 内测版本，优化投屏启动速度 | 兼容性同上一版本
 
 
 ### 集成 SDK
@@ -51,7 +52,7 @@ v0.1.6 | 测试版本，对WebRTC主要服务更新升级，增加对https支持
 该方法无需下载安装包。在项目文件中，将以下代码添加到页面中，尽量为 `<body>` 底部：
 
 ```javascript
-<script src="//sw-cdn.shunwanyun.com/webrtc/jssdk/mg-rtc-player-0.1.6.js"></script>
+<script src="//sw-cdn.shunwanyun.com/webrtc/jssdk/mg-rtc-player-0.1.7.js"></script>
 ```
 
 现在，我们已经将 MgRtcPlayer web SDK 集成到项目中了。接下来我们要通过调用 MgRtcPlayer web SDK 提供的 API 来实现功能。
@@ -104,7 +105,7 @@ SDK中主要对象说明：
         console.log('mg html onStart' );
       },
       onRunInfo: function (netDelay,fps,jitterDelay,recBitrate,w,h){
-        //网络延迟,fps,编码&传送延迟,码率,视频宽,视频高
+        //网络延迟,fps,编码&传送延迟,网络速率,视频宽,视频高
       },
       onStop: function () {
         console.log('mg html onStop');
@@ -126,6 +127,7 @@ SDK中主要对象说明：
 #### paasConfig
 - paasConfig 对游戏调度所需的接口配置
 - paasConfig.playType 取值说明：
+    - 0:使用控制服配置对象，直连设备， playType取值:0 时playValue取值控制服配置对象（**控制服配置对象请联系商务获取**）
     - 2:使用appid试玩 playType取值:2 时playValue取值:playAppId
     - 3:使用app包名试玩 playType取值:3 时playValue取值:playAppPackageName
 - paasConfig.palyAppKey 瞬玩运营平台中分配给对应帐号的appkey（**appkey请联系商务获取**），用于资源调度
@@ -158,7 +160,7 @@ SDK中主要对象说明：
   - netDelay     网络延迟
   - fps          帧率
   - jitterDelay  编码&传送延迟
-  - recBitrate   码率
+  - recBitrate   网络速率（Bps）
   - w            视频宽
   - h            视频高
 
