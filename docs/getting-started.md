@@ -70,8 +70,8 @@ v0.1.7 | 内测版本，优化投屏启动速度 | 兼容性同上一版本
 SDK中主要对象说明：
 
 - mgRtcPlayer  sdk入口对象（核心）
-- MgUtil  公共工具方法库（如getQueryString、sendUrlRequest、parseJSON等）
-- $ 获取dom对象， 实际为document.querySelector(selector);
+- mgUtil  公共工具方法库（如getQueryString、sendUrlRequest、parseJSON等）
+- mgUtil.$ 获取dom对象， 实际为document.querySelector(selector);
 - mgRtcPlayer.appController  操作控制对象，如发送手机按键（home、back等）
 - mgRtcPlayer.appWebRTC  WebRTC控制对象
 
